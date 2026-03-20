@@ -132,13 +132,15 @@ kubectl taint nodes --all node-role.kubernetes.io/control-plane- || true
 # kube-proxy를 edge 노드에 배치하지 않도록 패치
 kubectl patch daemonset kube-proxy -n kube-system -p '{"spec": {"template": {"spec": {"affinity": {"nodeAffinity": {"requiredDuringSchedulingIgnoredDuringExecution": {"nodeSelectorTerms": [{"matchExpressions": [{"key": "node-role.kubernetes.io/edge", "operator": "DoesNotExist"}]}]}}}}}}}'
 
+kubectl label services kubernetes service.edgemesh.kubeedge.io/service-proxy-name=""
+
 # EdgeMesh 설치
 PSK=$(openssl rand -base64 32)
 helm install edgemesh --namespace kubeedge \
   --set agent.psk="$PSK" \
-  --set agent.relayNodes[0].nodeName=etri-system-product-name \
+  --set agent.relayNodes[0].nodeName=etri-ser0001-CG0MSB \
   --set agent.relayNodes[0].advertiseAddress="{192.168.0.56}" \
-  edgemesh/edgemesh
+  https://raw.githubusercontent.com/kubeedge/edgemesh/main/build/helm/edgemesh.tgz
 ```
 
 
