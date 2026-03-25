@@ -119,6 +119,7 @@ sudo ./install-flannel-edge.sh
 > `install-flannel-edge.sh`는 반드시 Cloud 노드에서 실행.
 
 ### 4-1) EdgeMesh 설치 (Cloud에서 실행)
+https://kubeedge.io/docs/advanced/edgemesh
 
 > 아래 순서대로 적용
 
@@ -166,6 +167,10 @@ kubectl -n kube-system get ds kube-proxy -o wide
 ```
 
 ---
+https://edgemesh.netlify.app/guide/edge-kube-api.html 
+https://kubeedge.io/docs/advanced/inclusterconfig 
+추가적으로 적용하기
+
 
 ## 5) 확인
 
